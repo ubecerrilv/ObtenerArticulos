@@ -83,7 +83,7 @@ public class ControladorObtenedor {
             ArticleInfo articleInfo = extractArticleInfoOJS(page);
             pdf = articleInfo.getPdf();
 
-            pathFolder = String.format("/PruebasRedalyc/%d/%s_%s_%s/%s", claveRevista, numero, noPublicacion, year, articleInfo.getIdentificador());
+            pathFolder = String.format("../JSON/%d/%s_%s_%s/%s", claveRevista, numero, noPublicacion, year, articleInfo.getIdentificador());
             createFolderOJS(pathFolder);
             saveArticleInfoAsJsonOJS(articleInfo, pathFolder);
             downloadPdfOJS(pdf, pathFolder);
@@ -294,7 +294,7 @@ public class ControladorObtenedor {
             pdf = articleInfo.getPdf();
             xml = articleInfo.getXml();
 
-            pathFolder = String.format("../../WS/%d/%s_%s_%s/%s", claveRevista, numero, noPublicacion, year, totalArticulos);
+            pathFolder = String.format("../JSON/%d/%s_%s_%s/%s", claveRevista, numero, noPublicacion, year, totalArticulos);
             createFolderScielo(pathFolder);
             saveArticleInfoAsJsonScielo(articleInfo, pathFolder);
             downloadPdfScielo(pdf, pathFolder);
