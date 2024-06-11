@@ -1,10 +1,16 @@
 package com.redalyc.obtenerarticulos.modelo;
 
+import com.redalyc.obtenerarticulos.principal.ControladorRefinador;
+
 import java.util.ArrayList;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Buscadora {
+
+    private static final Logger logger = Logger.getLogger(Buscadora.class.getName());
+
     private final Pattern articuloOJS = Pattern.compile("(http|https)://\\S*/article/view/[0-9]+");
     private final Pattern datosOJS= Pattern.compile("Vol\\. ([0-9]+) \\S*\\. ([0-9]+) \\(([0-9]+)\\)");
 
@@ -35,7 +41,7 @@ public class Buscadora {
 
         //ENCONTRAR LAS COINCIDENCIAS DE LOS ARTÍCULOS
         Matcher matcher1 = articuloOJS.matcher(html);
-        while(matcher1.find()){
+        while(matcher1.find() && !articulos.contains(matcher1.group())){
             articulos.add(matcher1.group());
         }
 
@@ -46,6 +52,7 @@ public class Buscadora {
         volumen.setArticulos(articulos);
         revistaC.setVolumen(volumen);
 
+        logger.info("Articulos de revista OJS obtenidos");
         return revistaC;
     }
 
@@ -81,6 +88,8 @@ public class Buscadora {
         volumen.setYear(year);
         volumen.setArticulos(articulosS);
         revistaC.setVolumen(volumen);
+
+        logger.info("Artículos de revista Scielo obtenidos");
 
         return revistaC;
     }
