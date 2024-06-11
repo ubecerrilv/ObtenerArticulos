@@ -49,9 +49,6 @@ public class Buscadora {
         }
         ArrayList<String> articulos = new ArrayList<>(set);
 
-        for (String articulo: articulos){
-            System.out.println(articulo);
-        }
         //AGREGAR LOS DATOS AL VOLUMEN
         volumen.setNumero(volNum);
         volumen.setNoPublicacion(noPul);
