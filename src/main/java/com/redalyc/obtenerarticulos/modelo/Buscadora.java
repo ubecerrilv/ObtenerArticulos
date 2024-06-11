@@ -3,6 +3,7 @@ package com.redalyc.obtenerarticulos.modelo;
 import com.redalyc.obtenerarticulos.principal.ControladorRefinador;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -22,8 +23,10 @@ public class Buscadora {
     public Buscadora(){}
 
     public RevistaC ojs(String html){
+        //ARREGLO AUXILIAR
+        HashSet<String> set = new HashSet<>();
+
         //CREAR OBJETO A RETORNAR
-        ArrayList<String> articulos = new ArrayList<>();
         Volumen volumen = new Volumen();
         RevistaC revistaC = new RevistaC();
 
@@ -41,10 +44,14 @@ public class Buscadora {
 
         //ENCONTRAR LAS COINCIDENCIAS DE LOS ARTÍCULOS
         Matcher matcher1 = articuloOJS.matcher(html);
-        while(matcher1.find() && !articulos.contains(matcher1.group())){
-            articulos.add(matcher1.group());
+        while(matcher1.find()){
+            set.add(matcher1.group());
         }
+        ArrayList<String> articulos = new ArrayList<>(set);
 
+        for (String articulo: articulos){
+            System.out.println(articulo);
+        }
         //AGREGAR LOS DATOS AL VOLUMEN
         volumen.setNumero(volNum);
         volumen.setNoPublicacion(noPul);
